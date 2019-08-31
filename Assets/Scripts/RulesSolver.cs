@@ -42,20 +42,20 @@ public class RulesSolver
             }
 
             var killLeft = position + Vector2Int.up + Vector2Int.left;
-            if (position.y == 1 && isEnemy(board, killLeft, piece))
+            if (isEnemy(board, killLeft, piece))
             {
                 yield return new Move(piece, killLeft);
             }
 
             var killRight = position + Vector2Int.up + Vector2Int.right;
-            if (position.y == 1 && isEnemy(board, killRight, piece))
+            if (isEnemy(board, killRight, piece))
             {
                 yield return new Move(piece, killRight);
             }
 
             //cheat!
             var charge = position + Vector2Int.up * 4;
-            if (position.y == 1 && isEnemy(board, killRight, piece))
+            if (isEnemy(board, killRight, piece))
             {
                 yield return new Move(piece, killRight);
             }
@@ -69,26 +69,26 @@ public class RulesSolver
             }
 
             var doubleForward = position + Vector2Int.down * 2;
-            if (position.y == 1 && isFree(board, doubleForward))
+            if (position.y == 6 && isFree(board, doubleForward))
             {
                 yield return new Move(piece, doubleForward);
             }
 
             var killLeft = position + Vector2Int.down + Vector2Int.left;
-            if (position.y == 1 && isEnemy(board, killLeft, piece))
+            if (isEnemy(board, killLeft, piece))
             {
                 yield return new Move(piece, killLeft);
             }
 
             var killRight = position + Vector2Int.down + Vector2Int.right;
-            if (position.y == 1 && isEnemy(board, killRight, piece))
+            if (isEnemy(board, killRight, piece))
             {
                 yield return new Move(piece, killRight);
             }
 
             //cheat!
             var charge = position + Vector2Int.down * 4;
-            if (position.y == 1 && isEnemy(board, killRight, piece))
+            if (isEnemy(board, killRight, piece))
             {
                 yield return new Move(piece, killRight);
             }

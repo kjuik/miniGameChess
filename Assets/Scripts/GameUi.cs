@@ -27,7 +27,7 @@ public class GameUi : MonoBehaviour
         lastMove.text =
             $"Last move:\n{move.piece.color} {move.piece.type}\n" +
             $"from {PositionToString(GameManager.Instance.Board.GetPosition(move.piece))}" +
-            $"To {PositionToString(move.targetPosition)}";
+            $" to {PositionToString(move.targetPosition)}";
     }
 
     public void OnWon(Color color)
@@ -43,7 +43,6 @@ public class GameUi : MonoBehaviour
         if (move != null &&
             GameManager.Instance.Board.GetPossibleMoves(move.piece).Any(m => m.Equals(move)))
         {
-            Debug.Log($"Move possible");
             GameManager.Instance.PlayMove(move);
         }
     }
