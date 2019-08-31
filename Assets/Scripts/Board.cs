@@ -40,6 +40,11 @@ public class Board
         }
     }
 
+    internal Piece GetPiece(Vector2Int? originPos)
+    {
+        throw new NotImplementedException();
+    }
+
     public Vector2Int GetPosition(Piece piece)
     {
         for (var i = 0; i < 8; ++i)
