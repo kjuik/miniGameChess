@@ -19,4 +19,6 @@ public class Piece : MonoBehaviour
     {
         GameManager.Instance.InitializePiece(this);
     }
+
+    public override string ToString() => $"{color} {type}";
 }

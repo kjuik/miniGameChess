@@ -10,14 +10,14 @@ struct ScoredMove
     public float score;
 }
 
-public class ChessAI : MonoBehaviour
+public static class ChessAI 
 {
-    Board Simulate(Board board, Move move)
+    static Board Simulate(Board board, Move move)
     {
         return new Board();
     }
 
-    public Move GetNextMove(Board board, Color color)
+    static public Move GetNextMove(Board board, Color color)
     {
         var pieces = new List<Piece>(board.GetPieces(color));
 
@@ -36,7 +36,7 @@ public class ChessAI : MonoBehaviour
         return bestMoves.RandomElement();
     }
 
-    float ScoreFunction(int depth, Board board, Color color, Move move)
+    static float  ScoreFunction(int depth, Board board, Color color, Move move)
     {
         var piece = board.GetPiece(move.targetPosition);
         if (piece == null)

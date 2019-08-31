@@ -10,4 +10,6 @@ public class Move
         this.piece = piece;
         this.targetPosition = targetPosition;
     }
+
+    public override string ToString() => $"{piece} to {targetPosition}";
 }
