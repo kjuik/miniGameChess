@@ -2,6 +2,7 @@
 using System.Linq;
 using Neomento;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 
 struct ScoredMove
@@ -10,7 +11,7 @@ struct ScoredMove
     public float score;
 }
 
-public static class ChessAI 
+public static class ChessAI
 {
     static Board Simulate(Board board, Move move)
     {
@@ -38,18 +39,28 @@ public static class ChessAI
 
     static float  ScoreFunction(int depth, Board board, Color color, Move move)
     {
-        var piece = board.GetPiece(move.targetPosition);
-        if (piece == null)
+        float score = board.GetPiece(move.targetPosition) == null ? 0f : 1f; // Check hit
+
+        if (depth == GameManager.Instance.searchDepth)
         {
-            return 0f;
-        }
-        else
-        {
-            return 1f;
+            return score;
         }
 
-        // var newBoard = new Board(board);
+        var newBoard = new Board(board);
+        newBoard.ExecuteMove(move);
+        var nextColor = color.NextColor();
+        var pieces = new List<Piece>(board.GetPieces(nextColor));
 
-        // newBoard.ExecuteMove(move);
+        var admissible = new List<Move>().AsEnumerable();
+        
+        foreach (var piece in pieces)
+        {
+            admissible = admissible.Concat(newBoard.GetPossibleMoves(piece));
+        }
+        
+        float sumOfPoints = admissible.Average(m => ScoreFunction(depth + 1, newBoard, nextColor, m))
+            * (depth % 2 == 0 ? 1 : -1);
+        
+        return score + sumOfPoints;
     }
 }

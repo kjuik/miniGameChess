@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public Color currentTurn = Color.White;
 
+    public int searchDepth = 0;
+
     private void Awake()
     {
         Instance = this;
