@@ -17,13 +17,18 @@ public class GameManager : MonoBehaviour
 
     internal void InitializePiece(Piece piece)
     {
-        Board.InitializePiece(piece, (int)piece.transform.position.x, (int)piece.transform.position.z);
+        Board.InitializePiece(piece, Mathf.RoundToInt(piece.transform.position.x), Mathf.RoundToInt(piece.transform.position.z));
     }
 
     public void PlayMove(Move move)
     {
         Board.ExecuteMove(move);
         GameUi.Instance.OnMovePlayed(move);
+
+        move.piece.transform.position = new Vector3(
+            move.targetPosition.x,
+            move.piece.transform.position.y,
+            move.targetPosition.y);
 
         if (currentTurn == Color.White)
         {
