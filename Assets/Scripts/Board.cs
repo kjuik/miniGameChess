@@ -103,8 +103,13 @@ public class Board
     public void ExecuteMove(Move move)
     {
         var sourcePosition = GetPosition(move.piece);
-
         pieces[sourcePosition.x, sourcePosition.y] = null;
+
+        if (pieces[move.targetPosition.x, move.targetPosition.y] != null)
+        {
+            pieces[move.targetPosition.x, move.targetPosition.y].gameObject.SetActive(false);
+        }
+
         pieces[move.targetPosition.x, move.targetPosition.y] = move.piece;
     }
 
