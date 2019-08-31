@@ -59,6 +59,8 @@ public class Board
         return new Vector2Int(-1, -1);
     }
 
+    public Piece GetPiece(Vector2Int position) => pieces[position.x, position.y];
+    
     public IEnumerable<Move> GetPossibleMoves(Piece piece)
     {
         return RulesSolver.GetPossibleMoves(pieces, piece, GetPosition(piece));
