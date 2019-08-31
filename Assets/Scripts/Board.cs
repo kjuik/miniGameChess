@@ -75,6 +75,8 @@ public class Board
         {
             for (var j = 0; j < 8; ++j)
             {
+                if (pieces[i, j] == null) continue;
+                
                 if (pieces[i, j].type == Piece.Type.King)
                 {
                     if(pieces[i, j].color == Color.Black)
