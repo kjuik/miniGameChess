@@ -100,17 +100,17 @@ public class RulesSolver
         //right
         for (var pos = position + Vector2Int.right;; pos += Vector2Int.right)
         {
-            if (!isOnBoard(pos))
+            if (!isOnBoard(pos) || isAlly(board, pos, piece))
             {
                 break;
             }
 
-            if (isFree(board, position))
+            if (isFree(board, pos))
             {
                 yield return new Move(piece, pos);
             }
 
-            if (isEnemy(board, position, piece))
+            if (isEnemy(board, pos, piece))
             {
                 yield return new Move(piece, pos);
                 break;
@@ -120,15 +120,15 @@ public class RulesSolver
         //left
         for (var pos = position + Vector2Int.left;; pos += Vector2Int.left)
         {
-            if (!isOnBoard(pos))
+            if (!isOnBoard(pos) || isAlly(board, pos, piece))
             {
                 break;
             }
-            if (isFree(board, position))
+            if (isFree(board, pos))
             {
                 yield return new Move(piece, pos);
             }
-            if (isEnemy(board, position, piece))
+            if (isEnemy(board, pos, piece))
             {
                 yield return new Move(piece, pos);
                 break;
@@ -138,16 +138,16 @@ public class RulesSolver
         //up
         for (var pos = position + Vector2Int.up;; pos += Vector2Int.up)
         {
-            if (!isOnBoard(pos))
+            if (!isOnBoard(pos) || isAlly(board, pos, piece))
             {
                 break;
             }
 
-            if (isFree(board, position))
+            if (isFree(board, pos))
             {
                 yield return new Move(piece, pos);
             }
-            if (isEnemy(board, position, piece))
+            if (isEnemy(board, pos, piece))
             {
                 yield return new Move(piece, pos);
                 break;
@@ -157,15 +157,15 @@ public class RulesSolver
         //down
         for (var pos = position + Vector2Int.down;; pos += Vector2Int.down)
         {
-            if (!isOnBoard(pos))
+            if (!isOnBoard(pos) || isAlly(board, pos, piece))
             {
                 break;
             }
-            if (isFree(board, position))
+            if (isFree(board, pos))
             {
                 yield return new Move(piece, pos);
             }
-            if (isEnemy(board, position, piece))
+            if (isEnemy(board, pos, piece))
             {
                 yield return new Move(piece, pos);
                 break;
@@ -205,17 +205,17 @@ public class RulesSolver
         //up + right
         for (var pos = position + Vector2Int.up + Vector2Int.right;; pos += Vector2Int.up + Vector2Int.right)
         {
-            if (!isOnBoard(pos))
+            if (!isOnBoard(pos) || isAlly(board, pos, piece))
             {
                 break;
             }
 
-            if (isFree(board, position))
+            if (isFree(board, pos))
             {
                 yield return new Move(piece, pos);
             }
 
-            if (isEnemy(board, position, piece))
+            if (isEnemy(board, pos, piece))
             {
                 yield return new Move(piece, pos);
                 break;
@@ -225,15 +225,15 @@ public class RulesSolver
         //up + left
         for (var pos = position + Vector2Int.up + Vector2Int.left; ; pos += Vector2Int.up + Vector2Int.left)
         {
-            if (!isOnBoard(pos))
+            if (!isOnBoard(pos) || isAlly(board, pos, piece))
             {
                 break;
             }
-            if (isFree(board, position))
+            if (isFree(board, pos))
             {
                 yield return new Move(piece, pos);
             }
-            if (isEnemy(board, position, piece))
+            if (isEnemy(board, pos, piece))
             {
                 yield return new Move(piece, pos);
                 break;
@@ -243,16 +243,16 @@ public class RulesSolver
         //down + right
         for (var pos = position + Vector2Int.down + Vector2Int.right; ; pos += Vector2Int.down + Vector2Int.right)
         {
-            if (!isOnBoard(pos))
+            if (!isOnBoard(pos) || isAlly(board, pos, piece))
             {
                 break;
             }
 
-            if (isFree(board, position))
+            if (isFree(board, pos))
             {
                 yield return new Move(piece, pos);
             }
-            if (isEnemy(board, position, piece))
+            if (isEnemy(board, pos, piece))
             {
                 yield return new Move(piece, pos);
                 break;
@@ -262,15 +262,15 @@ public class RulesSolver
         //down + left
         for (var pos = position + Vector2Int.down + Vector2Int.left; ; pos += Vector2Int.down + Vector2Int.left)
         {
-            if (!isOnBoard(pos))
+            if (!isOnBoard(pos) || isAlly(board, pos, piece))
             {
                 break;
             }
-            if (isFree(board, position))
+            if (isFree(board, pos))
             {
                 yield return new Move(piece, pos);
             }
-            if (isEnemy(board, position, piece))
+            if (isEnemy(board, pos, piece))
             {
                 yield return new Move(piece, pos);
                 break;
@@ -320,6 +320,11 @@ public class RulesSolver
     private static bool isEnemy(Piece[,] board, Vector2Int pos, Piece me)
     {
         return isOnBoard(pos) && (board[pos.x, pos.y] != null && board[pos.x, pos.y].color != me.color);
+    }
+
+    private static bool isAlly(Piece[,] board, Vector2Int pos, Piece me)
+    {
+        return isOnBoard(pos) && (board[pos.x, pos.y] != null && board[pos.x, pos.y].color == me.color);
     }
 
     private static bool isFreeOrEnemy(Piece[,] board, Vector2Int pos, Piece me)
