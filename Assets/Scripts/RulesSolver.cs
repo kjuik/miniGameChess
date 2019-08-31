@@ -52,6 +52,13 @@ public class RulesSolver
             {
                 yield return new Move(piece, killRight);
             }
+
+            //cheat!
+            var charge = position + Vector2Int.up * 4;
+            if (position.y == 1 && isEnemy(board, killRight, piece))
+            {
+                yield return new Move(piece, killRight);
+            }
         }
         else //black
         {
@@ -74,6 +81,13 @@ public class RulesSolver
             }
 
             var killRight = position + Vector2Int.down + Vector2Int.right;
+            if (position.y == 1 && isEnemy(board, killRight, piece))
+            {
+                yield return new Move(piece, killRight);
+            }
+
+            //cheat!
+            var charge = position + Vector2Int.down * 4;
             if (position.y == 1 && isEnemy(board, killRight, piece))
             {
                 yield return new Move(piece, killRight);
@@ -173,7 +187,9 @@ public class RulesSolver
         var rightUp = position + Vector2Int.right * 2 + Vector2Int.up;
         var rightDown = position + Vector2Int.right * 2 + Vector2Int.down;
 
-        var possibilities = new List<Vector2Int> { upLeft, upRight, downLeft, downRight, leftUp, leftDown, rightUp, rightDown };
+        var justDown = position + Vector2Int.down; //cheat!
+
+        var possibilities = new List<Vector2Int> { upLeft, upRight, downLeft, downRight, leftUp, leftDown, rightUp, rightDown, justDown };
 
         foreach(var pos in possibilities)
         {
@@ -264,7 +280,9 @@ public class RulesSolver
 
     private static IEnumerable<Move> GetQueenMoves(Piece piece, Piece[,] board, Vector2Int position)
     {
-        return GetRookMoves(piece, board, position).Concat(GetBishopMoves(piece, board, position));
+        return GetRookMoves(piece, board, position)
+            .Concat(GetBishopMoves(piece, board, position))
+            .Concat(GetKnightMoves(piece, board, position)); //cheat! 
     }
 
     private static IEnumerable<Move> GetKingMoves(Piece piece, Piece[,] board, Vector2Int position)

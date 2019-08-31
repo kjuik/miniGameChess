@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +6,8 @@ public class GameManager : MonoBehaviour
     public Board Board { get; private set; }
 
     public Color currentTurn = Color.White;
+
+    public int searchDepth = 0;
 
     private void Awake()
     {
@@ -16,11 +17,27 @@ public class GameManager : MonoBehaviour
 
     internal void InitializePiece(Piece piece)
     {
-        Board.InitializePiece(piece, (int)piece.transform.position.x, (int)piece.transform.position.z);
+        Board.InitializePiece(piece, Mathf.RoundToInt(piece.transform.position.x), Mathf.RoundToInt(piece.transform.position.z));
     }
 
-    internal void PlayMove(Move move)
+    public void PlayMove(Move move)
     {
-        throw new NotImplementedException();
+        Board.ExecuteMove(move);
+        GameUi.Instance.OnMovePlayed(move);
+
+        move.piece.transform.position = new Vector3(
+            move.targetPosition.x,
+            move.piece.transform.position.y,
+            move.targetPosition.y);
+
+        if (currentTurn == Color.White)
+        {
+            currentTurn = Color.Black;
+            PlayMove(ChessAI.GetNextMove(Board, Color.Black));
+        }
+        else
+        {
+            currentTurn = Color.White;
+        }
     }
 }
