@@ -230,5 +230,17 @@ namespace Neomento
 
             return result;
         }
+        
+        public static Color NextColor(this Color color)
+        {
+            if (color == Color.White)
+            {
+                return Color.Black;
+            }
+            else
+            {
+                return Color.White;
+            }
+        }
     }
 }

@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using Neomento;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 struct TreeNode
 {
     public Board board;
     public List<TreeNode> children;
     public float value;
+}
+
+struct ScoredMove
+{
+    public Move move;
+    public float score;
 }
 
 public class ChessAI : MonoBehaviour
@@ -29,11 +36,16 @@ public class ChessAI : MonoBehaviour
             admissible = admissible.Concat(board.GetPossibleMoves(piece));
         }
 
-        return admissible.RandomElement();
+        var scores = admissible.Select(move => ScoreFunction(0, board, color, move)).ToList();
+        float maxScore = scores.Max();
+        var zipped = admissible.Zip(scores, (move, f) => new ScoredMove(){move = move, score = f});
+        var bestMoves = from scoredMove in zipped where scoredMove.score == maxScore select scoredMove.move;
+
+        return bestMoves.RandomElement();
     }
 
-    void RecFunction(int depth, Board board, Color color)
+    float ScoreFunction(int depth, Board board, Color color, Move move)
     {
-        
+        return 0f;
     }
 }
