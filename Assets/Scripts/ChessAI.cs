@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Neomento;
 using UnityEngine;
@@ -21,13 +22,18 @@ public class ChessAI : MonoBehaviour
     {
         var pieces = new List<Piece>(board.GetPieces(color));
 
-        List<Move> admissible = new List<Move>();
+        var admissible = new List<Move>().AsEnumerable();
         
         foreach (var piece in pieces)
         {
-            admissible.Concat(board.GetPossibleMoves(piece));
+            admissible = admissible.Concat(board.GetPossibleMoves(piece));
         }
 
         return admissible.RandomElement();
+    }
+
+    void RecFunction(int depth, Board board, Color color)
+    {
+        
     }
 }
