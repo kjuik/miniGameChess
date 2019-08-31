@@ -33,11 +33,20 @@ public class GameManager : MonoBehaviour
         if (currentTurn == Color.White)
         {
             currentTurn = Color.Black;
-            PlayMove(ChessAI.GetNextMove(Board, Color.Black));
         }
         else
         {
             currentTurn = Color.White;
+        }
+
+        var winner = Board.GetWinner();
+        if (winner.HasValue)
+        {
+            GameUi.Instance.OnWon(winner.Value);
+        }
+        else if (currentTurn == Color.Black)
+        {
+            PlayMove(ChessAI.GetNextMove(Board, Color.Black));
         }
     }
 }

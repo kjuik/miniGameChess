@@ -17,11 +17,23 @@ public class GameUi : MonoBehaviour
     public Text lastMove;
     public Button submit;
 
+    public GameObject winPopup;
+    public Text winText;
+
     string currentMoveString => moveInput.text;
 
     public void OnMovePlayed(Move move)
     {
-        lastMove.text = $"Last move:\n{move.piece.color} {move.piece.type}\nTo {PositionToString(move.targetPosition)}";
+        lastMove.text =
+            $"Last move:\n{move.piece.color} {move.piece.type}\n" +
+            $"from {PositionToString(GameManager.Instance.Board.GetPosition(move.piece))}" +
+            $"To {PositionToString(move.targetPosition)}";
+    }
+
+    public void OnWon(Color color)
+    {
+        winPopup.SetActive(true);
+        winText.text = $"{color} wins!";
     }
 
     public void OnSubmit()
