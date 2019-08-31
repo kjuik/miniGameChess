@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         Board = new Board();
+
+        foreach(var piece in Board.GetPieces(Color.Black))
+        {
+
+        }
     }
 
     internal void InitializePiece(Piece piece)
