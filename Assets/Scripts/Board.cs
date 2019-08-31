@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Board
@@ -63,7 +64,9 @@ public class Board
     
     public IEnumerable<Move> GetPossibleMoves(Piece piece)
     {
-        return RulesSolver.GetPossibleMoves(pieces, piece, GetPosition(piece));
+        var moves = RulesSolver.GetPossibleMoves(pieces, piece, GetPosition(piece));
+        return moves.Where(m =>
+            m.targetPosition.x >= 0 && m.targetPosition.x <= 7 && m.targetPosition.y >= 0 && m.targetPosition.y <= 7);
     }
 
     public Color? GetWinner()

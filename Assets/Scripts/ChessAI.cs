@@ -49,7 +49,7 @@ public static class ChessAI
         var newBoard = new Board(board);
         newBoard.ExecuteMove(move, false);
         var nextColor = color.NextColor();
-        var pieces = new List<Piece>(board.GetPieces(nextColor));
+        var pieces = new List<Piece>(newBoard.GetPieces(nextColor));
 
         var admissible = new List<Move>().AsEnumerable();
         
