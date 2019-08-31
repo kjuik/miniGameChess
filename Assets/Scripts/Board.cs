@@ -53,9 +53,9 @@ public class Board
         return new Vector2Int(-1, -1);
     }
 
-    public void GetPossibleMoves(Piece piece)
+    public IEnumerator<Move> GetPossibleMoves(Piece piece)
     {
-        throw new Exception("lol");
+        return RulesSolver.GetPossibleMoves(pieces, piece, GetPosition(piece));
     }
 
     public Color? GetWinner()
