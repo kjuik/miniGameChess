@@ -100,12 +100,12 @@ public class Board
         return null;
     }
 
-    public void ExecuteMove(Move move)
+    public void ExecuteMove(Move move, bool withDisable = true)
     {
         var sourcePosition = GetPosition(move.piece);
         pieces[sourcePosition.x, sourcePosition.y] = null;
 
-        if (pieces[move.targetPosition.x, move.targetPosition.y] != null)
+        if (withDisable && pieces[move.targetPosition.x, move.targetPosition.y] != null)
         {
             pieces[move.targetPosition.x, move.targetPosition.y].gameObject.SetActive(false);
         }

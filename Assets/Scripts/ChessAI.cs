@@ -47,7 +47,7 @@ public static class ChessAI
         }
 
         var newBoard = new Board(board);
-        newBoard.ExecuteMove(move);
+        newBoard.ExecuteMove(move, false);
         var nextColor = color.NextColor();
         var pieces = new List<Piece>(board.GetPieces(nextColor));
 

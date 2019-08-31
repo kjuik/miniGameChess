@@ -40,7 +40,7 @@ public class GameUi : MonoBehaviour
     {
         var move = ParseMove(moveInput.text.Trim());
 
-        if (move != null &&
+        if (move != null && move.piece != null &&
             GameManager.Instance.Board.GetPossibleMoves(move.piece).Any(m => m.Equals(move)))
         {
             GameManager.Instance.PlayMove(move);
