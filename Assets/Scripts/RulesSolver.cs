@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RulesSolver
 {
-    internal static IEnumerator<Move> GetPossibleMoves(Piece[,] board, Piece piece, Vector2Int position)
+    internal static IEnumerable<Move> GetPossibleMoves(Piece[,] board, Piece piece, Vector2Int position)
     {
         switch (piece.type)
         {
@@ -25,33 +25,33 @@ public class RulesSolver
         }
     }
 
-    private static IEnumerator<Move> GetPawnMoves(Piece piece, Piece[,] board, Vector2Int position)
+    private static IEnumerable<Move> GetPawnMoves(Piece piece, Piece[,] board, Vector2Int position)
     {
         throw new NotImplementedException();
     }
 
 
-    private static IEnumerator<Move> GetRookMoves(Piece piece, Piece[,] board, Vector2Int position)
+    private static IEnumerable<Move> GetRookMoves(Piece piece, Piece[,] board, Vector2Int position)
     {
         throw new NotImplementedException();
     }
 
-    private static IEnumerator<Move> GetKnightMoves(Piece piece, Piece[,] board, Vector2Int position)
+    private static IEnumerable<Move> GetKnightMoves(Piece piece, Piece[,] board, Vector2Int position)
     {
         throw new NotImplementedException();
     }
 
-    private static IEnumerator<Move> GetBishopMoves(Piece piece, Piece[,] board, Vector2Int position)
+    private static IEnumerable<Move> GetBishopMoves(Piece piece, Piece[,] board, Vector2Int position)
     {
         throw new NotImplementedException();
     }
 
-    private static IEnumerator<Move> GetQueenMoves(Piece piece, Piece[,] board, Vector2Int position)
+    private static IEnumerable<Move> GetQueenMoves(Piece piece, Piece[,] board, Vector2Int position)
     {
         throw new NotImplementedException();
     }
 
-    private static IEnumerator<Move> GetKingMoves(Piece piece, Piece[,] board, Vector2Int position)
+    private static IEnumerable<Move> GetKingMoves(Piece piece, Piece[,] board, Vector2Int position)
     {
         throw new NotImplementedException();
     }

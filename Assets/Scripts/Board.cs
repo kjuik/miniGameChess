@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ public class Board
         pieces[x, z] = piece;
     }
 
-    public IEnumerator<Piece> GetPieces(Color c)
+    public IEnumerable<Piece> GetPieces(Color c)
     {
         for (var i = 0; i < 8; ++i)
         {
@@ -53,7 +54,7 @@ public class Board
         return new Vector2Int(-1, -1);
     }
 
-    public IEnumerator<Move> GetPossibleMoves(Piece piece)
+    public IEnumerable<Move> GetPossibleMoves(Piece piece)
     {
         return RulesSolver.GetPossibleMoves(pieces, piece, GetPosition(piece));
     }
