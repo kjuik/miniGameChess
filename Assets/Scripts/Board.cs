@@ -34,7 +34,7 @@ public class Board
         {
             for (var j = 0; j < 8; ++j)
             {
-                if (pieces[i, j].color == c)
+                if (pieces[i, j] != null && pieces[i, j].color == c)
                     yield return pieces[i, j];
             }
         }
