@@ -1,18 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Board
 {
-    Piece[,] pieces;
+    public readonly Piece[,] pieces;
 
     public Board()
     {
         pieces = new Piece[8,8];
-    }
-
-    internal void InitializePiece(Piece piece, int x, int z)
-    {
-        pieces[x, z] = piece;
     }
 
     public Board(Board toClone) : this()
@@ -26,7 +22,24 @@ public class Board
         }
     }
 
-    Vector2Int GetPosition(Piece piece)
+    public void InitializePiece(Piece piece, int x, int z)
+    {
+        pieces[x, z] = piece;
+    }
+
+    public IEnumerator<Piece> GetPieces(Color c)
+    {
+        for (var i = 0; i < 8; ++i)
+        {
+            for (var j = 0; j < 8; ++j)
+            {
+                if (pieces[i, j].color == c)
+                    yield return pieces[i, j];
+            }
+        }
+    }
+
+    public Vector2Int GetPosition(Piece piece)
     {
         for (var i = 0; i < 8; ++i)
         {
@@ -40,12 +53,44 @@ public class Board
         return new Vector2Int(-1, -1);
     }
 
-    void GetPossibleMoves(Piece piece)
+    public void GetPossibleMoves(Piece piece)
     {
         throw new Exception("lol");
     }
 
-    void ExecuteMove(Move move)
+    public Color? GetWinner()
+    {
+        bool whiteKingFound = false;
+        bool blackKingFound = false;
+
+        for (var i = 0; i < 8; ++i)
+        {
+            for (var j = 0; j < 8; ++j)
+            {
+                if (pieces[i, j].type == Piece.Type.King)
+                {
+                    if(pieces[i, j].color == Color.Black)
+                    {
+                        blackKingFound = true;
+                    }
+                    else
+                    {
+                        whiteKingFound = true;
+                    }
+                }
+            }
+        }
+
+        if (!blackKingFound)
+            return Color.White;
+
+        if (!whiteKingFound)
+            return Color.Black;
+
+        return null;
+    }
+
+    public void ExecuteMove(Move move)
     {
         var sourcePosition = GetPosition(move.piece);
 

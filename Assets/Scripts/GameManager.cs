@@ -15,6 +15,4 @@ public class GameManager : MonoBehaviour
     {
         Board.InitializePiece(piece, (int)piece.transform.position.x, (int)piece.transform.position.z);
     }
-
-    public void 
 }
