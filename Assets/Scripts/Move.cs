@@ -12,4 +12,13 @@ public class Move
     }
 
     public override string ToString() => $"{piece} to {targetPosition}";
+
+    public override bool Equals(object obj)
+    {
+        if (obj is Move otherMove)
+        {
+            return otherMove.piece == piece && otherMove.targetPosition == targetPosition;
+        }
+        return false;
+    }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,8 +18,19 @@ public class GameManager : MonoBehaviour
         Board.InitializePiece(piece, (int)piece.transform.position.x, (int)piece.transform.position.z);
     }
 
-    internal void PlayMove(Move move)
+    public void PlayMove(Move move)
     {
-        throw new NotImplementedException();
+        Board.ExecuteMove(move);
+        GameUi.Instance.OnMovePlayed(move);
+
+        if (currentTurn == Color.White)
+        {
+            currentTurn = Color.Black;
+            PlayMove(ChessAI.GetNextMove(Board, Color.Black));
+        }
+        else
+        {
+            currentTurn = Color.White;
+        }
     }
 }

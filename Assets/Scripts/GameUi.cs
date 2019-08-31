@@ -29,8 +29,9 @@ public class GameUi : MonoBehaviour
         var move = ParseMove(moveInput.text.Trim());
 
         if (move != null &&
-            GameManager.Instance.Board.GetPossibleMoves(move.piece).Any(m => m == move))
+            GameManager.Instance.Board.GetPossibleMoves(move.piece).Any(m => m.Equals(move)))
         {
+            Debug.Log($"Move possible");
             GameManager.Instance.PlayMove(move);
         }
     }
@@ -69,6 +70,8 @@ public class GameUi : MonoBehaviour
 
     private string PositionToString(Vector2Int pos)
     {
-        return "lol";
+        return "" + 
+            new List<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' }[pos.x] + 
+            new List<char> { '1', '2', '3', '4', '5', '6', '7', '8' }[pos.y];
     }
 }
