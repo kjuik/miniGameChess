@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTurn: 0
-  searchDepth: 0
+  searchDepth: 3
 --- !u!4 &1434714062
 Transform:
   m_ObjectHideFlags: 0
