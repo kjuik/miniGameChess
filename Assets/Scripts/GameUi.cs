@@ -40,10 +40,26 @@ public class GameUi : MonoBehaviour
     {
         var move = ParseMove(moveInput.text.Trim());
 
+        Debug.Log(
+            $"move:\n{move.piece.color} {move.piece.type}\n" +
+            $"from {PositionToString(GameManager.Instance.Board.GetPosition(move.piece))}" +
+            $" to {PositionToString(move.targetPosition)}");
+
+        foreach (var pos in GameManager.Instance.Board.GetPossibleMoves(move.piece))
+        {
+            Debug.Log($"Possible move:\n{pos.piece.color} {pos.piece.type}\n" +
+                        $"from {PositionToString(GameManager.Instance.Board.GetPosition(pos.piece))}" +
+                        $" to {PositionToString(pos.targetPosition)}");
+        }
+
         if (move != null && move.piece != null &&
             GameManager.Instance.Board.GetPossibleMoves(move.piece).Any(m => m.Equals(move)))
         {
             GameManager.Instance.PlayMove(move);
+        }
+        else
+        {
+            Debug.Log("Move impossible");
         }
     }
 
